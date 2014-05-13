@@ -362,6 +362,10 @@ module.exports = Backbone.View.extend({
         'Ctrl-Cmd-P': function(codemirror) {
           self.preview();
         },
+        'Ctrl-Alt-P': function(codemirror) {
+          self.preview();
+        },
+
         'Cmd-B': function(codemirror) {
           if (self.editor.getSelection() !== '') self.toolbar.bold(self.editor.getSelection());
         },
