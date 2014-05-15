@@ -13,13 +13,16 @@ BROWSERIFY = node_modules/.bin/browserify
 TEMPLATES = $(shell find templates -type f -name '*.html')
 TESTS = $(shell find test -type f -name '*.js' | grep -v -E '(test/lib/index.js|test/lib/polyfill.js)')
 
-all: \
+all: node_modules \
 	test/lib/index.js \
 	dist/prose.js \
 	dist/prose.min.js
 
-install:
-	npm install && mkdir -p dist && make
+node_modules:
+	npm install
+
+install: node_modules
+	mkdir -p dist && make
 
 clean:
 	rm -f dist/*
