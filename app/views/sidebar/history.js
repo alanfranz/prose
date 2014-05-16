@@ -130,7 +130,7 @@ module.exports = Backbone.View.extend({
           },
           error: (function(model, xhr, options) {
             this.router.error(xhr);
-          }).bind(this),
+          }).bind(this)
         });
       });
     });
