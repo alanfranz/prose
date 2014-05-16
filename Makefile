@@ -8,6 +8,7 @@ else
 	NODE=node
 endif
 
+CLOSURE = closure-compiler
 UGLIFY = node_modules/.bin/uglifyjs
 BROWSERIFY = node_modules/.bin/browserify
 TEMPLATES = $(shell find templates -type f -name '*.html')
@@ -118,4 +119,8 @@ dist/prose.js: oauth.json $(APPLICATION) $(LIBS) dist/templates.js
 dist/prose.min.js: dist/prose.js
 	$(UGLIFY) dist/prose.js > dist/prose.min.js
 
-.PHONY: clean translations install
+dist/prose-closure.js: oauth.json $(APPLICATION) $(LIBS) dist/templates.js
+	$(CLOSURE) --source_map_format=V3 --js_output_file dist/prose-closure.js --create_source_map dist/prose-closure.js.map require.js $(LIBS) $(APPLICATION)
+	echo '//@ sourceMappingURL=prose-closure.js.map' >> dist/prose-closure.js
+
+.PHONY: clean translations install;
